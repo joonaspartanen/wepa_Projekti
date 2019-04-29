@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:fragment="head(title)" lang="en">
+        <title th:text="${title}">Title</title>
+        <meta charset="UTF-8" /> 
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <link rel="stylesheet" type="text/css" href="../static/css/styles.css" th:href="@{/css/styles.css}"/>
+    </head>
+    <body>
+        <header th:fragment="header(profilePath)">
+            <nav class="navbar navbar-expand-lg fixed-top">
+                <div class="navbar-brand">
+                    <a th:href="@{/{path}(path=${profilePath})}"><img src="../static/img/wepa_logo.png" th:src="@{/img/wepa_logo.png}" width="auto" height="50"></a>
+                </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="fa fa-navicon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav">
+                        <li class="nav-item mr-3">
+                            <a class="nav-link" th:href="@{/{path}(path=${profilePath})}">My page</a>
+                        </li>
+                        <li class="nav-item mr-3">
+                            <a class="nav-link" th:href="@{/users}">All users</a>
+                        </li>
+                        <li class="nav-item mr-3">
+                            <a class="nav-link" th:href="@{/logout}">Log out</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <div th:fragment="userList(users)" class="col-12">
+            <div class="row mb-3">
+                <div class="col-12 input-group">
+                    <input type="text" id="searchUsers" class="form-control py-2 border-right-0 border" style="outline:none; box-shadow:none" onkeyup="searchUsers()" placeholder="Search users"/>
+                    <span class="input-group-append">
+                        <div class="input-group-text bg-transparent"><i class="fa fa-search"></i></div>
+                    </span>
+                </div>
+            </div>
+
+            <ul class="list-group" id="userList">
+                <li class="list-group-item user-wrapper border-0" th:each="user: ${users}">
+                    <div th:switch="${user.profilepic}">
+                        <a th:case="null" th:href="@{/{profilePath}(profilePath=${user.profilePath})}"><img class="profilepic mr-3" th:src="@{/img/defaultProfilepic.jpg}"/></a>
+                        <a th:case="*" th:href="@{/{profilePath}(profilePath=${user.profilePath})}"><img class="profilepic mr-3" th:src="@{/pics/{id}/content(id=${user.profilepic.id})}"/></a>
+                    </div>
+                    <div class="container">
+                        <a class="username" th:href="@{/{profilePath}(profilePath=${user.profilePath})}" th:text="${user.username}">User</a>
+                        <form th:action="@{/users/friendRequest}" method="post" th:if="${!#lists.contains(currentUser.friends, user)}">
+                            <input type="hidden" id="friendId" name="friendId" th:value="*{user.id}" />
+                            <button class="btn btn-primary btn-sm mt-1" type="submit">Send friend request</button>
+                        </form>
+                    </div>
+                </li>
+            </ul> 
+        </div>
+        <footer class="navbar navbar-expand-lg justify-content-center" th:fragment="footer">
+            <small>This project was created for the Helsinki University course "Web-palvelinohjelmointi Java" in April 2019.</small>
+        </footer>
+        <div th:fragment="scripts">
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+            <script th:inline="javascript"> var contextRoot = /*[[@{/}]]*/ '';</script>
+            <script th:src="@{/javascript/projekti.js}" defer></script>
+        </div>
+    </body>
+</html>

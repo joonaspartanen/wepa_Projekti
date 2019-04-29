@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/layout :: head(title='Sign up')">
+    </head>
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-lg fixed-top">
+                <div class="navbar-brand">
+                    <a href="#"><img src="../static/img/wepa_logo.png" th:src="@{/img/wepa_logo.png}" width="auto" height="50"></a>
+                </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="fa fa-navicon"></span>
+                </button>
+            </nav>
+        </header>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4 mb-3 ml-3 mr-3">Signup form</h1>
+                <p class="lead ml-3 mr-3">Welcome to our site! There are few things we would like to know about you.</p>
+            </div>
+        </div>
+
+        <div class="container mb-5">
+            <form action="/signup" method="POST" enctype="multipart/form-data" th:object="${account}">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Username" required minlength="4" maxlength="20"/>
+                    <small id="usernameHelp" class="form-text text-muted">Choose a username between 4 and 20 characters.</small>
+                    <div class="alert alert-danger mt-1" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username error</div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required minlength="8" maxlength="60"/>
+                    <small id="passwordHelp" class="form-text text-muted">Your password must be between 8 and 60 characters.</small>
+                    <div class="alert alert-danger mt-1" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</div> 
+                </div>
+                <div class="form-group">
+                    <label for="presentation">Presentation</label>
+                    <textarea class="form-control" id="presentation" name="presentation" placeholder="Tell us a little bit about yourself." required minlength="10" maxlength="300"></textarea>
+                    <small id="presentationHelp" class="form-text text-muted">Your presentation must be between 10 and 300 characters long.</small>
+                    <div class="alert alert-danger mt-1" th:if="${#fields.hasErrors('presentation')}" th:errors="*{presentation}">Presentation error</div> 
+                </div>
+                <div class="form-group">
+                    <label for="profilePath">Profile path</label>
+                    <input type="text" class="form-control" id="profilePath" name="profilePath" placeholder="Choose a personal profile path" required minlength="4" maxlength="30"/>
+                    <small id="profilePathHelp" class="form-text text-muted">Your personal page will be available at: .../profilepath. Your profile path must be between 4 and 30 characters long.</small>
+                    <div class="alert alert-danger mt-1" th:if="${#fields.hasErrors('profilePath')}" th:errors="*{profilePath}">Profilepath error</div> 
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        <footer th:replace="fragments/layout :: footer">
+        </footer>
+    </body>
+</html>
+
+

@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/layout :: head(title='My pictures')">
+    </head>
+    <body>
+        <header th:replace="fragments/layout :: header(profilePath=${currentUser.profilePath})"></header>
+        <div class="jumbotron jumbotron-fluid mb-3">
+            <div class="container">
+                <h1 class="display-4 ml-3 mr-3">Pictures of <span th:text="${user.username}"</span></h1>
+                <p class="lead ml-3 mr-3">This is a selection of user's favorite pictures.</p>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row justify-content-end">
+                <button th:if="${currentUser == user}" class="btn btn-primary mb-3 mr-3" id="showEditButton" onclick="showEdit()"><span class="fa fa-wrench mr-2"></span>Edit album</button>
+            </div>
+            <div th:if="${#lists.isEmpty(user.pictures)}">
+                <div class="alert alert-primary mb-3" role="alert">This user hasn't uploaded any pictures yet.</div>
+            </div>
+            <div class="row">
+                <div th:each="picture : ${pictures}" class="col-lg-4 col-sm-6">
+                    <figure>
+                        <img class="img-thumbnail" th:src="@{/pics/{id}/content(id=${picture.id})}"/>
+                        <figcaption class="figure-caption" th:text="${picture.caption}">A caption for the above image.</figcaption>
+                    </figure>
+                    <div class="row justify-content-end">
+                        <form class="mr-1 ml-1" th:action="@{/{profilePath}/pics/{id}/profilePic(profilePath=${user.profilePath}, id=${picture.id})}" method="post" th:if="${currentUser.profilePath == user.profilePath}">
+                            <input type="hidden" id="setProfilePic" name="setProfilePic" value="setProfilePic" />
+                            <button class="btn btn-primary btn-sm mr-0 ml-0 mt-0 mb-1" style="display: none" type="submit"><span class="fa fa-user mr-2"></span>Set as profile picture</button>
+                        </form>
+                        <form class="mr-1 ml-1" th:action="@{/{profilePath}/pics/{id}/delete(profilePath=${user.profilePath}, id=${picture.id})}" method="post" th:if="${currentUser.profilePath == user.profilePath}">
+                            <input type="hidden" id="deletePicture" name="deletePicture" value="deletePicture" />
+                            <button class="btn btn-primary btn-sm mr-0 ml-0 mt-0 mb-1" style="display: none" type="submit"><span class="fa fa-trash mr-2"></span>Delete</button>
+                        </form>
+                        <form class="mr-3 ml-1 postLike" th:action="@{/{profilePath}/pics/{id}/like(profilePath=${user.profilePath}, id=${picture.id})}" method="post">
+                            <input type="hidden" id="pictureLike" name="pictureLike" value="pictureLike" />
+                            <button class="btn btn-primary btn-sm mr-0 ml-0 mt-0 mb-1" type="submit"><span class="fa fa-heart"></span><span th:text="${#lists.size(picture.likes)}" class="badge badge-light ml-2">likes</span>
+                                <span class="sr-only">likes</span></button>
+                        </form>
+                    </div>
+                    <div class="media mt-3" th:each="comment,commentIndex : ${picture.comments}" th:unless="${commentIndex.index > 9}">
+                        <div th:switch="${comment.author.profilepic}">
+                            <a th:case="null" th:href="@{/{profilePath}(profilePath=${comment.author.profilePath})}"><img class="profilepic mr-3" th:src="@{/img/defaultProfilepic.jpg}"/></a>
+                            <a th:case="*" th:href="@{/{profilePath}(profilePath=${comment.author.profilePath})}"><img class="profilepic mr-3" th:src="@{/pics/{id}/content(id=${comment.author.profilepic.id})}"/></a>
+                        </div>
+                        <div class="media-body">
+                            <h5><span class="mt-0" th:text="${comment.author.username}">Post author</span><span class="small" th:text="${' at ' + #temporals.format(comment.time, 'HH:mm (dd.MM.yyyy)')}"</span></h5>
+                            <div th:text="${comment.content}">Comment content</div>
+                        </div>
+                    </div>
+                    <form method="POST" th:action="@{/{profilePath}/pics/{id} (profilePath=${user.profilePath}, id=${picture.id})}" th:if="${#lists.contains(user.friends, currentUser) OR currentUser.profilePath == user.profilePath}"> 
+                        <div class="form-group mt-3">
+                            <textarea maxlength="1000" class="form-control col-12" style="width: 100%" id="commentContent" name="commentContent" rows="" placeholder="Comment picture" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-secondary"><span class="fa fa-pencil mr-2"></span>Comment</button>
+                        </div>
+                    </form> 
+                </div>
+            </div>
+            <div th:if="${currentUser.profilePath == user.profilePath}">
+                <form method="POST" th:action="@{/pics}" enctype="multipart/form-data" th:if="${#lists.size(currentUser.pictures) != 10}">
+                    <div class="form-group">
+                        <label for="picture">Add a new picture</label>
+                        <input type="file" class="form-control-file" id="file" name="file">
+                    </div>
+                    <div class="form-group">
+                        <label for="caption">Add a caption for your picture.</label>
+                        <textarea class="form-control" id="caption" name="caption" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-3">Submit</button>
+                </form>
+                <div class="alert alert-primary" th:if="${#lists.size(currentUser.pictures) == 10}"><span class="fa fa-exclamation-triangle mr-2"></span>You can only have 10 pictures in your album. Delete some pictures to add more.
+                </div>
+            </div>
+            <footer th:replace="fragments/layout :: footer">
+            </footer>
+        </div>
+        <div th:replace="fragments/layout :: scripts"></div>
+    </body>
+</html>

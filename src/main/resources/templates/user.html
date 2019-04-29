@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/layout :: head(title='My page')">
+    </head>
+    <body>
+        <header th:replace="fragments/layout :: header(profilePath=${currentUser.profilePath})"></header>
+        <div class="container pt-3">
+            <div class="row">
+                <div class="col-12 col-md-4 sidebar mt-3 ">
+                    <div class="row justify-content-center" th:switch="${user.profilepic}">
+                        <img th:case="null" class="profilepic mb-3" th:src="@{/img/defaultProfilepic.jpg}"/></a>
+                        <img th:case="*" class="profilepic mb-3" th:src="@{/pics/{id}/content(id=${user.profilepic.id})}"/></a>
+                    </div>
+                    <h2 class="row justify-content-center display-4 mb-3" th:text="${user.username}">
+                        Username goes here.
+                    </h2>
+                    <div class="row justify-content-center mb-3" th:text="${user.presentation}">
+                        A short presentation.
+                    </div>
+                    <div th:if="${#httpServletRequest.requestURI == '/' + currentUser.profilePath}">
+                        <div class="container justify-content-center">
+                            <h3 th:if="${!friendRequests.empty}" class="row justify-content-center mt-5 mb-3">Friend requests</h3>
+                            <div class="media friend-wrapper" th:each="friendRequest: ${friendRequests}">
+                                <div th:switch="${friendRequest.requester.profilepic}">
+                                    <a th:case="null" th:href="@{/{profilePath}(profilePath=${friendRequest.requester.profilePath})}"><img class="profilepic mr-3 ml-3" th:src="@{/img/defaultProfilepic.jpg}"/></a>
+                                    <a th:case="*" th:href="@{/{profilePath}(profilePath=${friendRequest.requester.profilePath})}"><img class="profilepic mr-3 ml-3" th:src="@{/pics/{id}/content(id=${friendRequest.requester.profilepic.id})}"/></a>
+                                </div>
+                                <div class="media-body">
+                                    <h5><span th:text="${friendRequest.requester.username}" class="mt-0">User</span><span th:text="${' at ' + #temporals.format(friendRequest.time, 'HH:mm (dd.MM.yyyy)')}" class="small">time</span></h5>
+                                    <div class="row justify-content-start">
+                                        <form class="mr-1 ml-3" th:action="@{/{profilePath}/acceptFriendRequest(profilePath=${currentUser.profilePath})}" method="post">
+                                            <input type="hidden" id="friendId" name="friendId" th:value="*{friendRequest.requester.id}" />
+                                            <button class="btn btn-primary btn-sm mr-0 mb-1" type="submit"><span class="fa fa-check mr-1"></span>Accept</button>
+                                        </form>
+                                        <form class="mr-1 ml-1" th:action="@{/{profilePath}/declineFriendRequest(profilePath=${currentUser.profilePath})}" method="post">
+                                            <input type="hidden" id="friendId" name="friendId" th:value="*{friendRequest.requester.id}" />
+                                            <button class="btn btn-secondary btn-sm" type="submit"><span class="fa fa-times mr-1"></span>Decline</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="container d-none d-md-block">
+                            <h3 class="row justify-content-center mt-3 mb-3">My friends</h3>
+                        </div>
+                        <div class="container d-none d-md-block">
+                            <div class="friend-wrapper  mb-3" th:each="friend,friendIndex: ${friends}" th:unless="${friendIndex.index > 5}">
+                                <div th:switch="${friend.profilepic}">
+                                    <a th:case="null" th:href="@{/{profilePath}(profilePath=${friend.profilePath})}"><img class="profilepic mr-3 ml-3" th:src="@{/img/defaultProfilepic.jpg}"/></a>
+                                    <a th:case="*" th:href="@{/{profilePath}(profilePath=${friend.profilePath})}"><img class="profilepic mr-3 ml-3" th:src="@{/pics/{id}/content(id=${friend.profilepic.id})}"/></a>
+                                </div>
+                                <h5 th:text="${friend.username}" class="mt-0">User</h5>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <a class="btn btn-primary justify-content-center mb-2" id="friends-btn" th:href="@{/{profilePath}/friends(profilePath=${user.profilePath})}"><span class="fa fa-user mr-2"></span>See all friends</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-8 mt-3">
+                    <div class="row">
+                        <div th:each="picture,picIndex : ${pictures}" th:unless="${picIndex.index > 5}" class="col-6 col-md-4">
+                            <img class="img-thumbnail mb-2" th:src="@{/pics/{id}/content(id=${picture.id})}">
+                        </div>
+                    </div> 
+                    <a class="btn btn-primary mt-1 mb-4" id="album-btn" th:href="@{/{profilePath}/pics(profilePath=${user.profilePath})}"><span class="fa fa-picture-o mr-2"></span>Go to album</a>
+                    <form method="POST" th:action="@{/{profilePath}/posts(profilePath=${user.profilePath})}" th:if="${#lists.contains(user.friends, currentUser) OR currentUser.profilePath == user.profilePath}">
+                        <div class="form-group">
+                            <textarea maxlength="1000" class="form-control mb-0" id="content" name="content" rows="6" placeholder="What's on your mind?" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary mb-3"><span class="fa fa-pencil mr-2"></span>Post</button>
+                        </div>
+                    </form>
+                    <div class="media col-12 post pt-3 mb-3" th:each="post : ${posts}">
+                        <div th:switch="${post.author.profilepic}">
+                            <a th:case="null" th:href="@{/{profilePath}(profilePath=${post.author.profilePath})}"><img class="profilepic mr-3" th:src="@{/img/defaultProfilepic.jpg}"/></a>
+                            <a th:case="*" th:href="@{/{profilePath}(profilePath=${post.author.profilePath})}"><img class="profilepic mr-3" th:src="@{/pics/{id}/content(id=${post.author.profilepic.id})}"/></a>
+                        </div>
+                        <div class="media-body">
+                            <h5><span class="mt-0" th:text="${post.author.username}">Post author</span><span class="small" th:text="${' at ' + #temporals.format(post.time, 'HH:mm (dd.MM.yyyy)')}"</span></h5>
+                            <span th:text="${post.content}">Post content</span>
+                            <form class="mr-1 ml-3 postLike text-right" th:action="@{/{profilePath}/posts/{id}/like(profilePath=${post.recipient.profilePath}, id=${post.id})}" method="post">
+                                <input type="hidden" id="postLike" name="postLike" value="postLike" />
+                                <button class="btn btn-primary btn-sm mr-0 ml-0 mt-3 mb-1" type="submit"><span class="fa fa-heart"></span><span th:text="${#lists.size(post.likes)}" class="badge badge-light ml-2">likes</span>
+                                    <span class="sr-only">likes</span></button>
+                            </form>
+                            <div class="media mt-1" th:each="comment,commentIndex : ${post.comments}" th:unless="${commentIndex.index > 9}">
+                                <div th:switch="${comment.author.profilepic}">
+                                    <a th:case="null" th:href="@{/{profilePath}(profilePath=${comment.author.profilePath})}"><img class="profilepic mr-3" th:src="@{/img/defaultProfilepic.jpg}"/></a>
+                                    <a th:case="*" th:href="@{/{profilePath}(profilePath=${comment.author.profilePath})}"><img class="profilepic mr-3" th:src="@{/pics/{id}/content(id=${comment.author.profilepic.id})}"/></a>
+                                </div>
+                                <div class="media-body">
+                                    <h5><span class="mt-0" th:text="${comment.author.username}">Post author</span><span class="small" th:text="${' at ' + #temporals.format(comment.time, 'HH:mm (dd.MM.yyyy)')}"</span></h5>
+                                    <span th:text="${comment.content}">Comment content</span>
+                                </div>
+                            </div>
+                            <form method="POST" th:action="@{/{profilePath}/posts/{id}(profilePath=${user.profilePath}, id=${post.id})}" th:if="${#lists.contains(user.friends, currentUser) OR currentUser.profilePath == user.profilePath}">
+                                <div class="form-group mt-3">
+                                    <textarea maxlength="1000" class="form-control col-12" style="width: 100%" id="commentContent" name="commentContent" rows="" placeholder="Comment post" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-secondary"><span class="fa fa-pencil mr-2"></span>Comment</button>
+                                </div>
+                            </form> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer th:replace="fragments/layout :: footer">
+        </footer>
+        <div th:replace="fragments/layout :: scripts"></div>
+    </body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/layout :: head(title='All users')">
+    </head>
+    <body>
+        <header th:replace="fragments/layout :: header(profilePath=${currentUser.profilePath})"></header>
+        <div class="jumbotron mb-3 jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4 ml-3 mr-3">All users</h1>
+            </div>
+        </div>
+        <div class="container">
+            <div th:replace="fragments/layout :: userList(users=${users})"></div>
+        </div>
+        <footer th:replace="fragments/layout :: footer">
+        </footer>
+        <div th:replace="fragments/layout :: scripts"></div>
+    </body>
+</html>
