@@ -42,4 +42,5 @@ public class Picture extends AbstractPersistable<Long> {
             joinColumns = @JoinColumn(name = "picture_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<Account> likes = new ArrayList<>();
+    
 }
