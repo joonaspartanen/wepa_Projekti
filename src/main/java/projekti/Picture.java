@@ -25,7 +25,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 public class Picture extends AbstractPersistable<Long> {
 
     private byte[] content;
-
+    
     @NotEmpty
     @Size(min = 1, max = 200)
     private String caption;
