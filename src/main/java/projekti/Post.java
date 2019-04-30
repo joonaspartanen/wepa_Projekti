@@ -35,13 +35,12 @@ public class Post extends AbstractPersistable<Long> implements Comparable<Post> 
 
     private LocalDateTime time;
 
-    @Lob
     @Column
     @NotEmpty
     @Size(min = 1, max = 1000)
     private String content;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany
     @JoinTable(name = "post_comments",
             joinColumns = @JoinColumn(name = "post_id"),
             inverseJoinColumns = @JoinColumn(name = "comment_id"))
@@ -50,7 +49,7 @@ public class Post extends AbstractPersistable<Long> implements Comparable<Post> 
 
     private boolean commentStatus = false;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(name = "post_likes",
             joinColumns = @JoinColumn(name = "post_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))

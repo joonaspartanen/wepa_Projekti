@@ -19,7 +19,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
-@Table(name="henkilo")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
