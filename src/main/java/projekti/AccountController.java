@@ -58,7 +58,6 @@ public class AccountController {
         Account user = userRepository.findByProfilePath(profilePath);
         model.addAttribute("user", user);
 
-        model.addAttribute("picture", user.getProfilepic().getId());
         model.addAttribute("friendRequests", user.getReceivedFriendRequests());
         model.addAttribute("friends", user.getFriends());
         model.addAttribute("currentUser", userService.getCurrentUser());
