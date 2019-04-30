@@ -62,5 +62,4 @@ public class Account extends AbstractPersistable<Long> {
 
     @OneToMany
     private List<Post> posts = new ArrayList<>();
-
 }
