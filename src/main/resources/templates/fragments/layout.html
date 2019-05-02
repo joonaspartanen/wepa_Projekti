@@ -49,7 +49,7 @@
                         <a th:case="*" th:href="@{/{profilePath}(profilePath=${user.profilePath})}"><img class="profilepic mr-3" th:src="@{/pics/{id}/content(id=${user.profilepic.id})}"/></a>
                     </div>
                     <div class="container">
-                        <a class="username" th:href="@{/{profilePath}(profilePath=${user.profilePath})}" th:text="${user.username}">User</a>
+                        <a class="display-4" th:href="@{/{profilePath}(profilePath=${user.profilePath})}" th:text="${user.username}">User</a>
                         <div th:if="${user != currentUser}">
                             <form th:action="@{/users/friendRequest}" method="post" th:if="${!#lists.contains(currentUser.friends, user)}">
                                 <input type="hidden" id="friendId" name="friendId" th:value="*{user.id}" />
