@@ -73,7 +73,7 @@
                 <div class="alert alert-primary" th:if="${#lists.size(currentUser.pictures) == 10}"><span class="fa fa-exclamation-triangle mr-2"></span>You can only have 10 pictures in your album. Delete some pictures to add more.
                 </div>
             </div>
-            <footer th:replace="fragments/layout :: footer">
+            <footer class="mt-3" th:replace="fragments/layout :: footer">
             </footer>
         </div>
         <div th:replace="fragments/layout :: scripts"></div>
