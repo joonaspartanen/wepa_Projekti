@@ -66,7 +66,7 @@
                             <img class="img-thumbnail mb-2" th:src="@{/pics/{id}/content(id=${picture.id})}">
                         </div>
                     </div> 
-                    <a class="btn btn-primary mt-1 mb-4" id="album-btn" th:href="@{/{profilePath}/pics(profilePath=${user.profilePath})}"><span class="fa fa-picture-o mr-2"></span>Go to album</a>
+                    <a class="btn btn-primary mt-1 mb-4" th:href="@{/{profilePath}/pics(profilePath=${user.profilePath})}"><span class="fa fa-picture-o mr-2"></span>Go to album</a>
                     <form method="POST" th:action="@{/{profilePath}/posts(profilePath=${user.profilePath})}" th:if="${#lists.contains(user.friends, currentUser) OR currentUser.profilePath == user.profilePath}">
                         <div class="form-group">
                             <textarea maxlength="1000" class="form-control mb-0" id="content" name="content" rows="6" placeholder="What's on your mind?" required></textarea>

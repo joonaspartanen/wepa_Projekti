@@ -42,7 +42,7 @@
                 </div>
             </div>
 
-            <ul class="list-group" id="userList">
+            <ul class="list-group mb-3" id="userList">
                 <li class="list-group-item user-wrapper border-0" th:each="user: ${users}">
                     <div th:switch="${user.profilepic}">
                         <a th:case="null" th:href="@{/{profilePath}(profilePath=${user.profilePath})}"><img class="profilepic mr-3" th:src="@{/img/defaultProfilepic.jpg}"/></a>
