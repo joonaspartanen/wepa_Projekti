@@ -38,14 +38,16 @@
                                 <span class="sr-only">likes</span></button>
                         </form>
                     </div>
-                    <div class="media mt-3" th:each="comment,commentIndex : ${picture.comments}" th:unless="${commentIndex.index > 9}">
-                        <div th:switch="${comment.author.profilepic}">
-                            <a th:case="null" th:href="@{/{profilePath}(profilePath=${comment.author.profilePath})}"><img class="profilepic mr-3" th:src="@{/img/defaultProfilepic.jpg}"/></a>
-                            <a th:case="*" th:href="@{/{profilePath}(profilePath=${comment.author.profilePath})}"><img class="profilepic mr-3" th:src="@{/pics/{id}/content(id=${comment.author.profilepic.id})}"/></a>
-                        </div>
-                        <div class="media-body">
-                            <h5><span class="mt-0" th:text="${comment.author.username}">Post author</span><span class="small" th:text="${' at ' + #temporals.format(comment.time, 'HH:mm (dd.MM.yyyy)')}"</span></h5>
-                            <div th:text="${comment.content}">Comment content</div>
+                    <div class="container mb-3">
+                        <div class="media mt-2" th:each="comment,commentIndex : ${picture.comments}" th:unless="${commentIndex.index > 9}">
+                            <div th:switch="${comment.author.profilepic}">
+                                <a th:case="null" th:href="@{/{profilePath}(profilePath=${comment.author.profilePath})}"><img class="profilepic mr-3" th:src="@{/img/defaultProfilepic.jpg}"/></a>
+                                <a th:case="*" th:href="@{/{profilePath}(profilePath=${comment.author.profilePath})}"><img class="profilepic mr-3" th:src="@{/pics/{id}/content(id=${comment.author.profilepic.id})}"/></a>
+                            </div>
+                            <div class="media-body">
+                                <h5><span class="mt-0" th:text="${comment.author.username}">Post author</span><span class="small" th:text="${' at ' + #temporals.format(comment.time, 'HH:mm (dd.MM.yyyy)')}"</span></h5>
+                                <div th:text="${comment.content}">Comment content</div>
+                            </div>
                         </div>
                     </div>
                     <form method="POST" th:action="@{/{profilePath}/pics/{id} (profilePath=${user.profilePath}, id=${picture.id})}" th:if="${#lists.contains(user.friends, currentUser) OR currentUser.profilePath == user.profilePath}"> 
@@ -73,7 +75,7 @@
                 <div class="alert alert-primary" th:if="${#lists.size(currentUser.pictures) == 10}"><span class="fa fa-exclamation-triangle mr-2"></span>You can only have 10 pictures in your album. Delete some pictures to add more.
                 </div>
             </div>
-            <footer class="mt-3" th:replace="fragments/layout :: footer">
+            <footer th:replace="fragments/layout :: footer">
             </footer>
         </div>
         <div th:replace="fragments/layout :: scripts"></div>
