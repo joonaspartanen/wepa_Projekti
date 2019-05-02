@@ -112,7 +112,17 @@ h5 {
     font-weight: bold;
     font-size: 1.5em;
     text-decoration: none;
-    color: #343A40;
+    color: black;
+}
+
+.username:hover {
+    text-decoration: none;
+    color: #404040;
+}
+
+.username:focus {
+    text-decoration: none;
+    color: #404040;
 }
 
 footer {
