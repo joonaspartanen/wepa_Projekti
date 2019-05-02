@@ -1,11 +1,7 @@
 package projekti;
 
-import java.time.LocalDateTime;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,12 +14,6 @@ public class PostController {
 
     @Autowired
     private PostService postService;
-
-    @Autowired
-    private AccountRepository userRepository;
-
-    @Autowired
-    private PostRepository postRepository;
 
     @PostMapping("/{profilePath}/posts")
     public String addPost(@PathVariable String profilePath, @RequestParam String content) {

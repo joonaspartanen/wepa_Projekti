@@ -23,9 +23,6 @@ public class PictureController {
     @Autowired
     private AccountService userService;
 
-    @Autowired
-    private PostRepository postRepository;
-
     @GetMapping("/{profilePath}/pics")
     public String getPics(Model model, @PathVariable String profilePath) {
 

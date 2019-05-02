@@ -12,7 +12,7 @@
         <header th:fragment="header(profilePath)">
             <nav class="navbar navbar-expand-lg fixed-top">
                 <div class="navbar-brand">
-                    <a th:href="@{/{path}(path=${profilePath})}"><img src="../static/img/wepa_logo.png" th:src="@{/img/wepa_logo.png}" width="auto" height="50"></a>
+                    <a th:href="@{/{path}(path=${profilePath})}"><img th:src="@{/img/wepa_logo.png}" width="auto" height="50"></a>
                 </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="fa fa-navicon"></span>
@@ -50,10 +50,13 @@
                     </div>
                     <div class="container">
                         <a class="username" th:href="@{/{profilePath}(profilePath=${user.profilePath})}" th:text="${user.username}">User</a>
-                        <form th:action="@{/users/friendRequest}" method="post" th:if="${!#lists.contains(currentUser.friends, user)}">
-                            <input type="hidden" id="friendId" name="friendId" th:value="*{user.id}" />
-                            <button class="btn btn-primary btn-sm mt-1" type="submit">Send friend request</button>
-                        </form>
+                        <div th:if="${user != currentUser}">
+                            <form th:action="@{/users/friendRequest}" method="post" th:if="${!#lists.contains(currentUser.friends, user)}">
+                                <input type="hidden" id="friendId" name="friendId" th:value="*{user.id}" />
+                                <button class="btn btn-primary btn-sm mt-1" type="submit">Send friend request</button>
+                            </form>
+                        </div>
+                    </div>
                     </div>
                 </li>
             </ul> 

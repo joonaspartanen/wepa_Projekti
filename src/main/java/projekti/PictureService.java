@@ -107,7 +107,7 @@ public class PictureService {
         }
 
         if (user.getProfilepic() == picture) {
-            setAsProfilePicture(profilePath, 34L);
+            setAsProfilePicture(profilePath, null);
         }
 
         user.getPictures().remove(picture);

@@ -3,7 +3,6 @@ package projekti;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,13 +16,48 @@ public class AccountService {
     private AccountRepository userRepository;
 
     @Autowired
-    private PictureRepository pictureRepository;
-
-    @Autowired
     private FriendRequestRepository friendRequestRepository;
 
     @Autowired
     PasswordEncoder passwordEncoder;
+    
+    public Account createNewUser(String username, String password, String presentation, String profilePath) {
+
+        Account user = new Account();
+
+        // Katkaistaan metodin suoritus, jos käyttäjänimi tai profiilipolku on jo varattu.
+        if (userRepository.findByUsername(username) != null || userRepository.findByProfilePath(profilePath) != null) {
+            return user;
+        }
+
+        user.setUsername(username);
+        user.setPassword(passwordEncoder.encode(password));
+        user.setPresentation(presentation);
+        user.setProfilePath(profilePath);
+
+        userRepository.save(user);
+        return user;
+    }
+
+    public Account getCurrentUser() {
+        
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Account currentUser = userRepository.findByUsername(auth.getName());
+        return currentUser;
+    }
+
+    public boolean checkIfFriends(Account user1, Account user2) {
+
+        return user1.getFriends().contains(user2);
+    }
+
+    public boolean checkIfFriendsOrPostingToOwnWall(String profilePath) {
+        
+        Account author = getCurrentUser();
+        Account recipient = getByProfilePath(profilePath);
+
+        return author.getFriends().contains(recipient) || author == recipient;
+    }
 
     public List<Account> getFriendRequestsAsUserObjects(Account user) {
 
@@ -91,43 +125,4 @@ public class AccountService {
         currentUser.getReceivedFriendRequests().remove(requestToRemove);
         userRepository.save(currentUser);
     }
-
-    public Account createNewUser(String username, String password, String presentation, String profilePath) {
-
-        Account user = new Account();
-
-        // Katkaistaan metodin suoritus, jos käyttäjänimi tai profiilipolku on jo varattu.
-        if (userRepository.findByUsername(username) != null || userRepository.findByProfilePath(profilePath) != null) {
-            return user;
-        }
-
-        user.setUsername(username);
-        user.setPassword(passwordEncoder.encode(password));
-        user.setPresentation(presentation);
-        user.setProfilePath(profilePath);
-
-        userRepository.save(user);
-        return user;
-    }
-
-    public Account getCurrentUser() {
-        
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Account currentUser = userRepository.findByUsername(auth.getName());
-        return currentUser;
-    }
-
-    public boolean checkIfFriends(Account user1, Account user2) {
-
-        return user1.getFriends().contains(user2);
-    }
-
-    public boolean checkIfFriendsOrPostingToOwnWall(String profilePath) {
-        
-        Account author = getCurrentUser();
-        Account recipient = getByProfilePath(profilePath);
-
-        return author.getFriends().contains(recipient) || author == recipient;
-    }
-
 }
