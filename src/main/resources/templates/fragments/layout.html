@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head th:fragment="head(title)" lang="en">
-        <title><span th:text="${title}">Title</span><span th:if="${user != null}" th:text="${user.username}"></span>Username</title>
+        <title th:text="${title}">Title</title>
         <meta charset="UTF-8" /> 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
