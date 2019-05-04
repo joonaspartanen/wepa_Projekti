@@ -61,7 +61,7 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-8 mt-3">
-                    <div class="row">
+                    <div class="row thumbnails">
                         <div th:each="picture,picIndex : ${pictures}" th:unless="${picIndex.index > 3}" class="col-12 col-md-6">
                             <img class="img-thumbnail mb-2" th:src="@{/pics/{id}/content(id=${picture.id})}">
                         </div>

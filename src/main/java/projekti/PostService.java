@@ -12,7 +12,7 @@ public class PostService {
 
     @Autowired
     private AccountRepository userRepository;
-    
+
     @Autowired
     private AccountService userService;
 
@@ -20,7 +20,7 @@ public class PostService {
 
         Account author = userService.getCurrentUser();
         Account recipient = userService.getByProfilePath(profilePath);
-        
+
         Post post = new Post();
         post.setAuthor(author);
         post.setRecipient(recipient);
@@ -30,7 +30,7 @@ public class PostService {
         postRepository.save(post);
         recipient.getPosts().add(post);
         userRepository.save(recipient);
-        
+
         return post;
     }
 
@@ -47,22 +47,24 @@ public class PostService {
         Post post = postRepository.getOne(id);
         post.getComments().add(comment);
         postRepository.save(post);
-        
+
         return post;
     }
 
-    public boolean addLike(Long id) {
+    public void handleLike(Long id) {
 
         Account user = userService.getCurrentUser();
         Post post = postRepository.getOne(id);
 
         if (post.getLikes().contains(user)) {
-            return false;
+            post.getLikes().remove(user);
+            postRepository.save(post);
+            return;
         }
 
         post.getLikes().add(user);
         postRepository.save(post);
-        return true;
+        return;
     }
 
 }

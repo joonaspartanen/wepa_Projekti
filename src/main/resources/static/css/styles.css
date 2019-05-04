@@ -146,7 +146,13 @@ footer {
 }
 
 .img-thumbnail {
-    width: 30em;
+    width: 100%;
     height: 20em;
+    object-fit: cover;
+}
+
+.thumbnails .img-thumbnail {
+    width: 100%;
+    height: 16em;
     object-fit: cover;
 }

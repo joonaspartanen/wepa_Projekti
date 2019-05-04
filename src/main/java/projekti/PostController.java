@@ -49,7 +49,7 @@ public class PostController {
     }
 
     @PostMapping("/{profilePath}/posts/{id}/like")
-    public String addLike(@PathVariable String profilePath, @PathVariable Long id) {
+    public String handleLike(@PathVariable String profilePath, @PathVariable Long id) {
 
         Account author = userService.getCurrentUser();
         Account recipient = userService.getByProfilePath(profilePath);
@@ -61,7 +61,7 @@ public class PostController {
             return "redirect:/" + recipient.getProfilePath();
         }
 
-        postService.addLike(id);
+        postService.handleLike(id);
         return "redirect:/" + profilePath;
     }
 

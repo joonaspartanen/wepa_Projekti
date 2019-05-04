@@ -84,12 +84,20 @@ public class PictureService {
         pictureRepository.save(pictureToComment);
     }
 
-    public void likePicture(String profilePath, Long id) {
+    public void handlePictureLike(String profilePath, Long id) {
 
         Account currentUser = userService.getCurrentUser();
         Picture picture = pictureRepository.getOne(id);
 
-        if (picture.getLikes().contains(currentUser) || !userService.checkIfFriendsOrPostingToOwnWall(profilePath)) {
+        if (!userService.checkIfFriendsOrPostingToOwnWall(profilePath)) {
+            return;
+        }
+        
+        System.out.println(picture.getLikes().contains(currentUser));
+
+        if (picture.getLikes().contains(currentUser)) {
+            picture.getLikes().remove(currentUser);
+            pictureRepository.save(picture);
             return;
         }
 

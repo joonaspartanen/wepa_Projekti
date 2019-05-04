@@ -62,9 +62,9 @@ public class PictureController {
     }
 
     @PostMapping("/{profilePath}/pics/{id}/like")
-    public String likePicture(@PathVariable String profilePath, @PathVariable Long id) {
+    public String handlePictureLike(@PathVariable String profilePath, @PathVariable Long id) {
 
-        pictureService.likePicture(profilePath, id);
+        pictureService.handlePictureLike(profilePath, id);
 
         return "redirect:/" + profilePath + "/pics";
     }
