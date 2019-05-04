@@ -144,3 +144,9 @@ footer {
     height: 3em;
     width: 3em;
 }
+
+.img-thumbnail {
+    width: 30em;
+    height: 20em;
+    object-fit: cover;
+}

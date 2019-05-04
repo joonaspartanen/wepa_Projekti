@@ -18,9 +18,9 @@
                 <div class="alert alert-primary mb-3" role="alert">This user hasn't uploaded any pictures yet.</div>
             </div>
             <div class="row">
-                <div th:each="picture : ${pictures}" class="col-lg-4 col-sm-6">
+                <div th:each="picture : ${pictures}" class="col-12 col-md-6 col-lg-4">
                     <figure>
-                        <img class="img-thumbnail" th:src="@{/pics/{id}/content(id=${picture.id})}"/>
+                        <a th:href="@{/pics/{id}/content(id=${picture.id})}"><img class="img-thumbnail" th:src="@{/pics/{id}/content(id=${picture.id})}"/></a>
                         <figcaption class="figure-caption" th:text="${picture.caption}">A caption for the above image.</figcaption>
                     </figure>
                     <div class="row justify-content-end">
@@ -75,9 +75,9 @@
                 <div class="alert alert-primary" th:if="${#lists.size(currentUser.pictures) == 10}"><span class="fa fa-exclamation-triangle mr-2"></span>You can only have 10 pictures in your album. Delete some pictures to add more.
                 </div>
             </div>
-            <footer th:replace="fragments/layout :: footer">
-            </footer>
         </div>
+        <footer th:replace="fragments/layout :: footer">
+        </footer>
         <div th:replace="fragments/layout :: scripts"></div>
     </body>
 </html>

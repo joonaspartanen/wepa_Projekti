@@ -6,15 +6,15 @@
         <header th:replace="fragments/layout :: header(profilePath=${currentUser.profilePath})"></header>
         <div class="container pt-3">
             <div class="row">
-                <div class="col-12 col-md-4 sidebar mt-3 ">
+                <div class="col-12 col-md-4 sidebar mt-3">
                     <div class="row justify-content-center" th:switch="${user.profilepic}">
                         <img th:case="null" class="profilepic mb-3" th:src="@{/img/defaultProfilepic.jpg}"/></a>
                         <img th:case="*" class="profilepic mb-3" th:src="@{/pics/{id}/content(id=${user.profilepic.id})}"/></a>
                     </div>
-                    <h2 class="row justify-content-center display-4 mb-3" th:text="${user.username}">
+                    <h2 class="row justify-content-center display-4 mb-3 px-3" th:text="${user.username}">
                         Username goes here.
                     </h2>
-                    <div class="row justify-content-center mb-3" th:text="${user.presentation}">
+                    <div class="row justify-content-center mb-3 px-3" th:text="${user.presentation}">
                         A short presentation.
                     </div>
                     <div th:if="${#httpServletRequest.requestURI == '/' + currentUser.profilePath}">
@@ -30,11 +30,11 @@
                                     <div class="row justify-content-start">
                                         <form class="mr-1 ml-3" th:action="@{/{profilePath}/acceptFriendRequest(profilePath=${currentUser.profilePath})}" method="post">
                                             <input type="hidden" id="friendId" name="friendId" th:value="*{friendRequest.requester.id}" />
-                                            <button class="btn btn-primary btn-sm mr-0 mb-1" type="submit"><span class="fa fa-check mr-1"></span>Accept</button>
+                                            <button class="btn btn-primary btn-sm mr-0 mb-3" type="submit"><span class="fa fa-check mr-1"></span>Accept</button>
                                         </form>
                                         <form class="mr-1 ml-1" th:action="@{/{profilePath}/declineFriendRequest(profilePath=${currentUser.profilePath})}" method="post">
                                             <input type="hidden" id="friendId" name="friendId" th:value="*{friendRequest.requester.id}" />
-                                            <button class="btn btn-secondary btn-sm" type="submit"><span class="fa fa-times mr-1"></span>Decline</button>
+                                            <button class="btn btn-secondary btn-sm mb-3" type="submit"><span class="fa fa-times mr-1"></span>Decline</button>
                                         </form>
                                     </div>
                                 </div>
@@ -47,7 +47,7 @@
                             <h3 class="row justify-content-center mt-3 mb-3">My friends</h3>
                         </div>
                         <div class="container d-none d-md-block">
-                            <div class="friend-wrapper  mb-3" th:each="friend,friendIndex: ${friends}" th:unless="${friendIndex.index > 5}">
+                            <div class="friend-wrapper mb-3 justify-content-center" th:each="friend,friendIndex: ${friends}" th:unless="${friendIndex.index > 5}">
                                 <div th:switch="${friend.profilepic}">
                                     <a th:case="null" th:href="@{/{profilePath}(profilePath=${friend.profilePath})}"><img class="profilepic mr-3 ml-3" th:src="@{/img/defaultProfilepic.jpg}"/></a>
                                     <a th:case="*" th:href="@{/{profilePath}(profilePath=${friend.profilePath})}"><img class="profilepic mr-3 ml-3" th:src="@{/pics/{id}/content(id=${friend.profilepic.id})}"/></a>
@@ -62,7 +62,7 @@
                 </div>
                 <div class="col-12 col-md-8 mt-3">
                     <div class="row">
-                        <div th:each="picture,picIndex : ${pictures}" th:unless="${picIndex.index > 5}" class="col-6 col-md-4">
+                        <div th:each="picture,picIndex : ${pictures}" th:unless="${picIndex.index > 3}" class="col-12 col-md-6">
                             <img class="img-thumbnail mb-2" th:src="@{/pics/{id}/content(id=${picture.id})}">
                         </div>
                     </div> 

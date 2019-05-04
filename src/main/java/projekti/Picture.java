@@ -24,6 +24,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @NoArgsConstructor
 public class Picture extends AbstractPersistable<Long> {
 
+    /*    @Lob // Tämä pitää poistaa, jotta toimii Herokussa.*/
     private byte[] content;
     
     @NotEmpty

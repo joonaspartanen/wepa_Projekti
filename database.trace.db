@@ -1,3 +1,0 @@
-2019-05-01 23:17:10 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLException: Value too long for column "CONTENT BINARY(255)": "X'ffd8ffe000104a46494600010101015e015e0000ffe1242e45786966000049492a00080000000d000e01020020000000aa0000000f01020018000000ca0000... (63487)"; SQL statement:
-insert into picture (caption, content, id) values (?, ?, ?) [22001-197]

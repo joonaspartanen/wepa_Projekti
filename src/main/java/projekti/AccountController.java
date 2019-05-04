@@ -88,7 +88,7 @@ public class AccountController {
     @PostMapping("/users")
     private String searchUsers(Model model, @RequestParam String search) {
 
-        model.addAttribute("users", userRepository.findByUsernameStartingWithIgnoreCase(search.trim()));
+        model.addAttribute("users", userService.getAllOtherUsers());
         model.addAttribute("currentUser", userService.getCurrentUser());
 
         return "users";

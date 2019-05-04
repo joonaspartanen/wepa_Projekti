@@ -35,6 +35,7 @@ public class Post extends AbstractPersistable<Long> implements Comparable<Post> 
 
     private LocalDateTime time;
 
+    /*    @Lob // Tämä pitää poistaa, että toimii Herokussa.*/
     @Column
     @NotEmpty
     @Size(min = 1, max = 1000)

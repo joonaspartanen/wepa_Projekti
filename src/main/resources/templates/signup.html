@@ -42,8 +42,8 @@
                 </div>
                 <div class="form-group">
                     <label for="profilePath">Profile path</label>
-                    <input type="text" class="form-control" id="profilePath" name="profilePath" placeholder="Choose a personal profile path" required minlength="4" maxlength="30"/>
-                    <small id="profilePathHelp" class="form-text text-muted">Your personal page will be available at: .../profilepath. Your profile path must be between 4 and 30 characters long.</small>
+                    <input type="text" class="form-control" id="profilePath" name="profilePath" placeholder="Choose a personal profile path" required pattern="\S+" title="Spaces are not allowed" minlength="4" maxlength="30"/>
+                    <small id="profilePathHelp" class="form-text text-muted">Your personal page will be available at: .../profilepath. Your profile path must be between 4 and 30 characters long and must not contain spaces.</small>
                     <div class="alert alert-danger mt-1" th:if="${#fields.hasErrors('profilePath')}" th:errors="*{profilePath}">Profilepath error</div> 
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>

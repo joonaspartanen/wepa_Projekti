@@ -3,6 +3,7 @@ package projekti;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Cacheable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,7 +21,7 @@ public class AccountService {
 
     @Autowired
     PasswordEncoder passwordEncoder;
-    
+
     public Account createNewUser(String username, String password, String presentation, String profilePath) {
 
         Account user = new Account();
@@ -33,14 +34,14 @@ public class AccountService {
         user.setUsername(username);
         user.setPassword(passwordEncoder.encode(password));
         user.setPresentation(presentation);
-        user.setProfilePath(profilePath);
+        user.setProfilePath(profilePath.trim());
 
         userRepository.save(user);
         return user;
     }
 
     public Account getCurrentUser() {
-        
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Account currentUser = userRepository.findByUsername(auth.getName());
         return currentUser;
@@ -52,7 +53,7 @@ public class AccountService {
     }
 
     public boolean checkIfFriendsOrPostingToOwnWall(String profilePath) {
-        
+
         Account author = getCurrentUser();
         Account recipient = getByProfilePath(profilePath);
 
