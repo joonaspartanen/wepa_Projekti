@@ -34,7 +34,7 @@ public class Post extends AbstractPersistable<Long> implements Comparable<Post> 
 
     private LocalDateTime time;
 
-    /*    @Lob // Tämä pitää poistaa, että toimii Herokussa.*/
+    @Lob // Tämä pitää poistaa, jotta toimii Herokussa.
     @Column
     @NotEmpty
     @Size(min = 1, max = 1000)
@@ -54,7 +54,7 @@ public class Post extends AbstractPersistable<Long> implements Comparable<Post> 
             joinColumns = @JoinColumn(name = "post_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<Account> likes = new ArrayList<>();
-    
+
     @Override
     public int compareTo(Post postToCompare) {
         if (this.getTime().isAfter(postToCompare.getTime())) {

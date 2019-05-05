@@ -22,9 +22,9 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @NoArgsConstructor
 public class Picture extends AbstractPersistable<Long> {
 
-    /*    @Lob // Tämä pitää poistaa, jotta toimii Herokussa.*/
+    @Lob // Tämä pitää poistaa, jotta toimii Herokussa.
     private byte[] content;
-    
+
     @NotEmpty
     @Size(min = 1, max = 200)
     private String caption;
@@ -41,4 +41,4 @@ public class Picture extends AbstractPersistable<Long> {
             joinColumns = @JoinColumn(name = "picture_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<Account> likes = new ArrayList<>();
-    }
+}
