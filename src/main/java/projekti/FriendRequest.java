@@ -23,5 +23,5 @@ public class FriendRequest extends AbstractPersistable<Long> {
     private Account friend;
 
     private LocalDateTime time;
-    
+
 }

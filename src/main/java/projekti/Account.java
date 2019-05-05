@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
-@Table(name="account") 
+@Table(name="account") // Tämän luokan nimi oli ensin User, minkä takia koodissa on nimetty joitain muuttujia "usereiksi" eikä "accounteiksi".
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
