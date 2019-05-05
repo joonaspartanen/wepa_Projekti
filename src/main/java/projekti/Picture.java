@@ -2,7 +2,9 @@ package projekti;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
@@ -22,7 +24,8 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @NoArgsConstructor
 public class Picture extends AbstractPersistable<Long> {
 
-    @Lob // Tämä pitää poistaa, jotta toimii Herokussa.
+    /*    @Lob // Tämä pitää poistaa, jotta toimii Herokussa.
+    @Basic(fetch = FetchType.LAZY)*/
     private byte[] content;
 
     @NotEmpty

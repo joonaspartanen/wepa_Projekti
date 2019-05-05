@@ -38,8 +38,6 @@ public class PictureService {
     public void addPicture(MultipartFile file, String caption) throws IOException {
 
         Account user = userService.getCurrentUser();
-        System.out.println("Tänne asti päästiin...");
-        System.out.println(file.getContentType());
         if (!file.getContentType().equals("image/jpeg")) {
             return;
         }
@@ -90,7 +88,7 @@ public class PictureService {
         if (!userService.checkIfFriendsOrPostingToOwnWall(profilePath)) {
             return;
         }
-        
+
         System.out.println(picture.getLikes().contains(currentUser));
 
         if (picture.getLikes().contains(currentUser)) {
@@ -113,7 +111,7 @@ public class PictureService {
         }
 
         if (user.getProfilepic() == picture) {
-            setAsProfilePicture(profilePath, null);
+            user.setProfilepic(null);
         }
 
         user.getPictures().remove(picture);
@@ -132,5 +130,4 @@ public class PictureService {
         user.setProfilepic(pictureRepository.getOne(id));
         userRepository.save(user);
     }
-
 }
