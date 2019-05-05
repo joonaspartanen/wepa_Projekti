@@ -16,4 +16,6 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
     @EntityGraph(attributePaths = {"profilePath", "username", "profilepic", "friends"})
     List<Account> findAll();
 
+    @EntityGraph(attributePaths = {"profilePath", "username", "profilepic", "friends"})
+    List<Account> findAllByOrderByUsernameAsc();
 }

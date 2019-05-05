@@ -77,7 +77,7 @@ public class AccountService {
     public List<Account> getAllOtherUsers() {
 
         Account currentUser = getCurrentUser();
-        List<Account> users = userRepository.findAll();
+        List<Account> users = userRepository.findAllByOrderByUsernameAsc();
         users.remove(currentUser);
 
         return users;
