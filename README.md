@@ -25,11 +25,11 @@ Sovelluksen Heroku-osoite: https://shrouded-harbor-56113.herokuapp.com/
 
 ### Sovelluksen käyttöohjeet
 
-KIRJAUTUMINEN:
+#### Kirjautuminen
 
 Sovellus ohjaa käyttäjän aluksi kirjautumissivulle /login. Uusia käyttäjiä varten kirjautumissivulla on linkki /signup-sivulle, missä uusi käyttäjä voi luoda tunnukset sovellukseen. Sekä /login että /signup ovat saatavilla ilman kirjautumista.
 
-TUNNUSTEN LUOMINEN:
+#### Tunnusten luominen
 
 Sovellukseen voi luoda tunnukset /signup-sivulla. Käyttäjän tulee antaa seuraavat tiedot: käyttäjätunnus, salasana, kuvaus, profiilipolku (käyttäjän henkilökohtainen sivu löytyy osoitteesta /profiilipolku).
 
@@ -37,13 +37,13 @@ Tiedot validoidaan sekä palvelimella että selaimessa (HTML5-lomakkeen validoin
 
 Käyttäjätunnuksen ja profiilipolun tulee olla uniikki. Sovellus ei anna luoda tunnuksia, jos jompikumpi näistä on jo varattu (tästä ei valitettavasti vielä tule käyttäjälle virheilmoitusta).
 
-KÄYTTÄJIEN HAKU:
+#### Käyttäjien haku
 
 Kaikki sovelluksen käyttäjät listataan /users-sivulla, josta käyttäjiä voi myös hakea käyttäjänimen perusteella. Haku on toteutettu harjoituksen vuoksi Javascriptillä, mikä ei välttämättä ole järkevää käyttäjämäärien kasvaessa, sillä nykyisessä toteutuksessa kaikki käyttäjät joudutaan hakemaan sivulle. 
 
 Tästä näkymästä on mahdollista lähettää kaveripyyntöjä muille käyttäjille, jotka eivät vielä ole nykyisen käyttäjän kavereita.
 
-HENKILÖKOHTAINEN SIVU:
+#### Henkilökohtainen sivu
 
 Kunkin käyttäjän henkilökohtainen sivu löytyy polusta /profiilipolku. Sovellus on suunniteltu avoimuuden ja demokraattisuuden periaatteita noudattaen niin, että kirjautuneet käyttäjät voivat tarkastella kaikkien muiden käyttäjien henkilökohtaisia sivuja.
 
@@ -55,10 +55,10 @@ Vain käyttäjän kaverit pystyvät postaamaan ja kommentoimaan käyttäjän hen
 
 Omalla sivullaan käyttäjä näkee myös listan vastausta odottavista kaveripyynnöistä.
 
-ALBUMI:
+#### Albumi
 
 Henkilökohtaiselta sivulta on pääsy kuva-albumiin, johon voi tallentaa korkeintaan 10 jpg-muotoista kuvaa kuvauksineen. Albumista löytyy myös “Edit album” -nappi, jonka avulla käyttäjä pääsee poistamaan kuvia tai valitsemaan jonkun niistä profiilikuvikseen.
 
-ULOSKIRJAUTUMINEN:
+#### Uloskirjautuminen
 
 Sovelluksesta kirjaudutaan ulos päävalikon Log out -linkistä.
