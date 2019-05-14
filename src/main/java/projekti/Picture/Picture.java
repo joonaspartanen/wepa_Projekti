@@ -1,5 +1,6 @@
-package projekti;
+package projekti.Picture;
 
+import projekti.Account.Account;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
@@ -17,6 +18,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.AbstractPersistable;
+import projekti.Post.Post;
 
 @Entity
 @Data
@@ -24,8 +26,8 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @NoArgsConstructor
 public class Picture extends AbstractPersistable<Long> {
 
-    /*    @Lob // Tämä pitää poistaa, jotta toimii Herokussa.
-    @Basic(fetch = FetchType.LAZY)*/
+    @Lob // Tämä pitää poistaa, jotta toimii Herokussa.
+    @Basic(fetch = FetchType.LAZY)
     private byte[] content;
 
     @NotEmpty

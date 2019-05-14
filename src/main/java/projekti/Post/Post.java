@@ -1,5 +1,6 @@
-package projekti;
+package projekti.Post;
 
+import projekti.Account.Account;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +35,8 @@ public class Post extends AbstractPersistable<Long> implements Comparable<Post> 
 
     private LocalDateTime time;
 
-    /*    @Lob // Tämä pitää poistaa, jotta toimii Herokussa.*/    @Column
+    @Lob // Tämä pitää poistaa, jotta toimii Herokussa
+    @Column
     @NotEmpty
     @Size(min = 1, max = 1000)
     private String content;

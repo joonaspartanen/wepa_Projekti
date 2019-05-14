@@ -1,5 +1,7 @@
-package projekti;
+package projekti.Picture;
 
+import projekti.Account.AccountService;
+import projekti.Account.Account;
 import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

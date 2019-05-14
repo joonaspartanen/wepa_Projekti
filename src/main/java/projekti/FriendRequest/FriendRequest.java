@@ -1,5 +1,6 @@
-package projekti;
+package projekti.FriendRequest;
 
+import projekti.Account.Account;
 import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.CascadeType;

@@ -1,5 +1,7 @@
-package projekti;
+package projekti.Account;
 
+import projekti.Account.AccountRepository;
+import projekti.Account.Account;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +11,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import projekti.FriendRequest.FriendRequest;
+import projekti.FriendRequest.FriendRequestRepository;
 
 @Service
 public class AccountService {

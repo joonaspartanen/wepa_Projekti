@@ -1,5 +1,6 @@
-package projekti;
+package projekti.Account;
 
+import projekti.Account.Account;
 import java.io.IOException;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import projekti.Picture.PictureService;
+import projekti.Post.PostRepository;
 
 @Controller
 public class AccountController {

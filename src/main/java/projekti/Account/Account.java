@@ -1,4 +1,4 @@
-package projekti;
+package projekti.Account;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +18,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.AbstractPersistable;
+import projekti.FriendRequest.FriendRequest;
+import projekti.Picture.Picture;
+import projekti.Post.Post;
 
 @Entity
 @Table(name="account") // Tämän luokan nimi oli ensin User, minkä takia koodissa on nimetty joitain muuttujia "usereiksi" eikä "accounteiksi".

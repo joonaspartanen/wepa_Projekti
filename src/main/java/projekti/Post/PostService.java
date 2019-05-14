@@ -1,5 +1,8 @@
-package projekti;
+package projekti.Post;
 
+import projekti.Account.AccountService;
+import projekti.Account.AccountRepository;
+import projekti.Account.Account;
 import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

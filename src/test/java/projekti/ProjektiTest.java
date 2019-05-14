@@ -1,5 +1,9 @@
 package projekti;
 
+import projekti.Post.PostService;
+import projekti.Account.AccountService;
+import projekti.Account.AccountRepository;
+import projekti.Account.Account;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
