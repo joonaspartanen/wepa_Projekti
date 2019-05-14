@@ -1,4 +1,4 @@
-# Final project / Server-side Web Development with Java
+# Final project | Server-side Web Development with Java
 
 Language: Java
 
@@ -15,7 +15,7 @@ The project consist of a social media site ("old school Facebook") with followin
 
 The project is also available on Heroku: https://shrouded-harbor-56113.herokuapp.com/
 
-## Ohjelmointiprojekti / Web-palvelinohjelmointi Java, kevät 2019
+## Ohjelmointiprojekti | Web-palvelinohjelmointi Java, kevät 2019
 
 Tehtävänanto suomeksi: https://docs.google.com/document/d/1BkJKxzfUmvTP5GXGkFiAOTTyf8yEwsodRjXMlTwL2rQ/edit
 
