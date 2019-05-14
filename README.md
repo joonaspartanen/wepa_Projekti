@@ -1,7 +1,5 @@
 # Final project | Server-side Web Development with Java
 
-Language: Java
-
 This is a project created for the Helsinki University course "Web-palvelinohjelmointi Java" (Server-side Web Development with Java) in April-May 2019.
 
 The project consist of a social media site ("old school Facebook") with following main functionalities:
