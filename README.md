@@ -20,6 +20,8 @@ The project is also available on Heroku: https://shrouded-harbor-56113.herokuapp
 Tehtävänanto suomeksi: https://docs.google.com/document/d/1BkJKxzfUmvTP5GXGkFiAOTTyf8yEwsodRjXMlTwL2rQ/edit
 
 Sovelluksen Heroku-osoite: https://shrouded-harbor-56113.herokuapp.com/
+* username: testaaja
+* password: testaaja
 
 ### Sovelluksen käyttöohjeet
 
