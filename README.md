@@ -1,5 +1,7 @@
 # Final project | Server-side Web Development with Java
 
+## About
+
 This is a project created for the Helsinki University course "Web-palvelinohjelmointi Java" (Server-side Web Development with Java) in April-May 2019.
 
 The project consist of a social media site ("old school Facebook") with following main functionalities:
@@ -12,6 +14,10 @@ The project consist of a social media site ("old school Facebook") with followin
 * Commenting posts and pictures
 
 The project is also available on Heroku: https://shrouded-harbor-56113.herokuapp.com/
+
+### Todos
+
+* Doing this project, I didn't have much knowledge about good software architecture practices, so it would definitely benefit of restructuring and refactoring.
 
 ## Ohjelmointiprojekti | Web-palvelinohjelmointi Java, kevät 2019
 
